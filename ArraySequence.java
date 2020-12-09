@@ -11,17 +11,30 @@ public class ArraySequence implements IntegerSequence {
 		currentIndex = 0;
 	}
 	public ArraySequence(IntegerSequence othersq) {
-		int[] datatemp = new int[othersq.length()];
+		othersq.reset();
+		// The following datatemp code is no longer necessary. Originally, I misread
+		// the part where ALL values would be copied, and assumed that partially-consumed
+		// sequences' consumed values would not be copied, necessitating this code:
+		/*
+			int[] datatemp = new int[othersq.length()];
+			int i = 0;
+			while (othersq.hasNext()) {
+				datatemp[i] = othersq.next();
+				i++;
+			}
+			data = new int[i];
+			for (int j = 0; j < data.length; j++) {
+				data[j] = datatemp[j];
+			}
+		*/
+		data = new int[othersq.length()];
 		int i = 0;
 		while (othersq.hasNext()) {
-			datatemp[i] = othersq.next();
-			i++;
-		}
-		data = new int[i];
-		for (int j = 0; j < data.length; j++) {
-			data[j] = datatemp[j];
+		 data[i] = othersq.next();
+		 i++;
 		}
 		currentIndex = 0;
+		othersq.reset();
 	}
 
 	public void reset() {

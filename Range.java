@@ -5,8 +5,11 @@ public class Range implements IntegerSequence {
 		this.start = start;
 		this.end = end;
 		if (end < start) {
-			this.end = start;
-			this.start = end;
+			/*
+				this.end = start;
+				this.start = end;
+			*/
+			throw new IllegalArgumentException("Can't have an end before the start!");
 		}
 		this.current = start;
 	}
@@ -14,7 +17,7 @@ public class Range implements IntegerSequence {
 		current = start;
 	}
 	public int length() {
-		return end - start;
+		return end - start + 1;
 	}
 	public boolean hasNext() {
 		return current <= end;
